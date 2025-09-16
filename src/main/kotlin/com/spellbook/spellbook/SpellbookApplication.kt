@@ -1,11 +1,15 @@
 package com.spellbook.spellbook
 
+import com.github.ajalt.clikt.core.main
+import com.github.ajalt.clikt.core.subcommands
+import com.spellbook.spellbook.subcommands.Add
+import com.spellbook.spellbook.subcommands.Del
+import com.spellbook.spellbook.subcommands.ListIt
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-import picocli.CommandLine
-import kotlin.system.exitProcess
 
 @SpringBootApplication
 class SpellbookApplication
 
-fun main(args: Array<String>) : Unit = exitProcess(CommandLine(SpellbookService()).execute(*args))
+fun main(args: Array<String>) = SpellbookService()
+    .subcommands(Add(), Del(), ListIt())
+    .main(args)

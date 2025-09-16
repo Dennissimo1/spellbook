@@ -1,14 +1,13 @@
 package com.spellbook.spellbook.subcommands
 
-import picocli.CommandLine
-import java.util.concurrent.Callable
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.arguments.argument
 
-@CommandLine.Command(name = "del", description = ["deletes an item"])
-class Del: Callable<String> {
+class Del: CliktCommand() {
 
-    @CommandLine.Parameters(index = "0", description = ["item to delete"])
-    var item: String = "something"
-    override fun call(): String? {
-        return "item ${item.slice(IntRange(start = 0, endInclusive = 10))} was deleted"
+    val item by argument()
+    override fun run() {
+            val str = "item ${item.slice(IntRange(start = 0, endInclusive = 10))} was deleted"
+            echo(str)
     }
 }
