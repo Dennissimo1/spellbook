@@ -11,7 +11,7 @@ data class SpellbookEntry(
 ) {
     fun SpellbookEntry.convert(): SpellbookDto {
         return SpellbookDto(
-            entryId = 0L,
+            id = 0L,
             item = this.itemToDo,
             state = this.stateOfItem,
             priority = this.priority,

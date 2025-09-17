@@ -1,5 +1,6 @@
 package com.spellbook.spellbook.models
 
+import jakarta.persistence.Column
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -10,10 +11,14 @@ import java.time.ZoneId
 data class SpellbookDto(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val entryId: Long,
+    val id: Long,
+    @Column(name = "ITEM", nullable = false)
     val item: String,
+    @Column(name = "STATE", nullable = false)
     val state: State,
+    @Column(name = "PRIORITY", nullable = false)
     val priority: Priority,
+    @Column(name = "DATE", nullable = false)
     val date: Instant,
 ) {
     fun SpellbookDto.convert(): SpellbookEntry {
