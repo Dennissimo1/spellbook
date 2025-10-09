@@ -8,14 +8,15 @@ data class SpellbookEntry(
     val priority: Priority,
     val stateOfItem: State,
     val dateFirstEntered: LocalDateTime,
-) {
-    fun SpellbookEntry.convert(): SpellbookDto {
-        return SpellbookDto(
-            id = 0L,
-            item = this.itemToDo,
-            state = this.stateOfItem,
-            priority = this.priority,
-            date = this.dateFirstEntered.toInstant(ZoneOffset.UTC),
-        )
-    }
+)
+
+fun SpellbookEntry.convert(): SpellbookDto {
+    return SpellbookDto(
+        id = 0L,
+        item = this.itemToDo,
+        state = this.stateOfItem,
+        priority = this.priority,
+        date = this.dateFirstEntered.toInstant(ZoneOffset.UTC),
+    )
 }
+

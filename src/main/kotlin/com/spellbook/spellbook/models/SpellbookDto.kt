@@ -32,11 +32,12 @@ data class SpellbookDto(
 
     fun State.map(): String =
         when (this) {
+            State.NEW -> "New"
             State.NOT_PICKED_UP -> "Not picked up"
             State.BUSY -> "Busy"
             State.FINISHED -> "Finished"
             State.POSTPONED -> "Postponed"
-    }
+        }
 
     fun Priority.map(): String = when (this) {
         Priority.HIGH -> "High"
@@ -53,6 +54,7 @@ enum class Priority {
 }
 
 enum class State {
+    NEW,
     NOT_PICKED_UP,
     BUSY,
     FINISHED,

@@ -1,14 +1,15 @@
 package com.spellbook.spellbook.domain
 
+import com.spellbook.spellbook.models.Priority
 import com.spellbook.spellbook.models.SpellbookDto
-import org.springframework.data.repository.CrudRepository
+import com.spellbook.spellbook.models.SpellbookEntry
+import com.spellbook.spellbook.models.State
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface SpellbookDbRepository : CrudRepository<SpellbookDto, Long> {
+interface SpellbookDbRepository : JpaRepository<SpellbookDto, Long> {
 
-//    fun findSpellbookEntriesByState(state: State): List<SpellbookEntry>
-//    fun findSpellbookEntriesByPriority_High(): List<SpellbookEntry>
-//    fun findSpellbookEntriesByPriority_Medium(): List<SpellbookEntry>
-//    fun findSpellbookEntriesByPriority_Low(): List<SpellbookEntry>
+    fun findSpellbookDtosByState(state: State): List<SpellbookDto>
+    fun findSpellbookDtosByPriority(priority: Priority): List<SpellbookDto>
 }

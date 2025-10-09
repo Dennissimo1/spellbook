@@ -1,13 +1,17 @@
 package com.spellbook.spellbook.domain
 
+import com.spellbook.spellbook.models.SpellbookDto
 import com.spellbook.spellbook.models.SpellbookEntry
 import com.spellbook.spellbook.models.State
+import com.spellbook.spellbook.models.convert
 import org.springframework.stereotype.Service
 
 @Service
-class SpellbookDbServiceImpl: SpellbookDbService {
+class SpellbookDbServiceImpl(
+    private val spellbookDbRepository: SpellbookDbRepository
+): SpellbookDbService {
     override fun putItemInSpellbook(entry: SpellbookEntry) {
-        TODO("Not yet implemented")
+        spellbookDbRepository.save(entry.convert())
     }
 
     override fun listAllStateItemsForToday(state: State): List<SpellbookEntry> {

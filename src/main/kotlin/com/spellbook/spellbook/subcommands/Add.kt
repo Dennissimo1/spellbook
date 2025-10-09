@@ -3,16 +3,20 @@ package com.spellbook.spellbook.subcommands
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.option
+import com.spellbook.spellbook.domain.SpellbookDbRepository
 import com.spellbook.spellbook.domain.SpellbookDbService
 import com.spellbook.spellbook.models.Priority
 import com.spellbook.spellbook.models.SpellbookEntry
 import com.spellbook.spellbook.models.State
-import java.time.LocalDate
+import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDateTime
 
 class Add(
-    private val dbService: SpellbookDbService
+
 ): CliktCommand() {
+
+    @Autowired
+    private val spellbookDbRepository =  SpellbookDbRepository
 
     val item by argument()
     val priorityHigh by option("--priorityHigh", "-ph", help = "Add high priority")
