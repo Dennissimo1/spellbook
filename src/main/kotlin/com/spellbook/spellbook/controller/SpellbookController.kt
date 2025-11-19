@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
+import java.util.UUID
 
 @RestController
 @RequestMapping("/v1")
@@ -25,6 +26,7 @@ class SpellbookController(
         @RequestParam(value = "status") status: String? = "new",
     ) {
         val entry = SpellbookEntry(
+            id = UUID.randomUUID().toString(),
             itemToDo = item,
             priority = mapPriority(priority),
             stateOfItem = mapStatus(status, item),
@@ -37,6 +39,15 @@ class SpellbookController(
             logger.error(e) { "Failed to add item to spellbook: ${e.message}" }
             ResponseEntity.notFound()
         }
+    }
+
+    @GetMapping(value = ["/getAll"])
+    fun getAllEntries(
+        @RequestParam(value = "priority") priority: String?,
+        @RequestParam(value = "status") status: String?,
+    ): List<SpellbookEntry> {
+        //TODO lets use the priority and status request params here as well. For now, only list all open items.
+        return spellbookService.getAllOpenItems()
     }
 
     private fun mapPriority(prio: String?): Priority {

@@ -6,7 +6,7 @@ import com.spellbook.spellbook.models.State
 interface SpellbookDbService {
 
     fun putItemInSpellbook(entry: SpellbookEntry)
-    fun listAllStateItemsForToday(state: State): List<SpellbookEntry>
+    fun listAllOpenStateItems(state: State): List<SpellbookEntry>
     fun markItemAsState(item: SpellbookEntry)
     fun markItemAsPriority(item: SpellbookEntry)
 }

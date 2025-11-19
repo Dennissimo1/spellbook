@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 data class SpellbookEntry(
+    val id: String,
     val itemToDo: String,
     val priority: Priority,
     val stateOfItem: State,
