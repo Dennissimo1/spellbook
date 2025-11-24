@@ -1,5 +1,6 @@
 package com.spellbook.spellbook.controller
 
+import com.spellbook.spellbook.domain.SpellbookDbRepository
 import com.spellbook.spellbook.models.Priority
 import com.spellbook.spellbook.models.SpellbookEntry
 import com.spellbook.spellbook.models.State
@@ -15,7 +16,8 @@ import java.util.UUID
 @RestController
 @RequestMapping("/v1")
 class SpellbookController(
-    private val spellbookService: SpellbookService
+    private val spellbookService: SpellbookService,
+    private val spellbookDbRepository: SpellbookDbRepository
 ) {
     private val logger = KotlinLogging.logger {}
 
@@ -48,6 +50,13 @@ class SpellbookController(
     ): List<SpellbookEntry> {
         //TODO lets use the priority and status request params here as well. For now, only list all open items.
         return spellbookService.getAllOpenItems()
+    }
+
+    @GetMapping(value = ["/markAsFinished"])
+    fun markAsFinished(
+        @RequestParam(value="id") id: String,
+    ) {
+        spellbookService.markItemAs(id.toLong(), State.FINISHED)
     }
 
     private fun mapPriority(prio: String?): Priority {

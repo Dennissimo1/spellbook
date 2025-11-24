@@ -7,6 +7,7 @@ interface SpellbookDbService {
 
     fun putItemInSpellbook(entry: SpellbookEntry)
     fun listAllOpenStateItems(state: State): List<SpellbookEntry>
-    fun markItemAsState(item: SpellbookEntry)
+    fun markItemAsState(id: Long, state: State)
     fun markItemAsPriority(item: SpellbookEntry)
+    fun getItemDetails(id: Long): SpellbookEntry
 }

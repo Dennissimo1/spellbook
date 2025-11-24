@@ -22,12 +22,12 @@ class SpellbookDbServiceImpl(
         return spellbookDbRepository.findSpellbookDtosByState(state).map { it.convert() }
     }
 
-    override fun markItemAsState(item: SpellbookEntry) {
-        val fromDb = spellbookDbRepository.getReferenceById(item.id.toLong())
+    override fun markItemAsState(id: Long, state: State) {
+        val fromDb = spellbookDbRepository.getReferenceById(id)
         spellbookDbRepository.save(SpellbookDto(
             id = fromDb.id,
             item = fromDb.item,
-            state = item.stateOfItem,
+            state = state,
             priority = fromDb.priority,
             date = fromDb.date,
         ))
@@ -42,5 +42,10 @@ class SpellbookDbServiceImpl(
             priority = item.priority,
             date = fromDb.date,
         ))
+    }
+
+    override fun getItemDetails(id: Long): SpellbookEntry {
+        val fromDb = spellbookDbRepository.getReferenceById(id)
+        return fromDb.convert()
     }
 }

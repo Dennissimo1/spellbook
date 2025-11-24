@@ -15,8 +15,16 @@ class SpellbookService(
         spellbookDbService.putItemInSpellbook(sbEntry)
     }
 
+    fun getItem(id: Long): SpellbookEntry {
+        return spellbookDbService.getItemDetails(id)
+    }
+
     fun getAllOpenItems(): List<SpellbookEntry> {
         return State.entries.map { state -> spellbookDbService.listAllOpenStateItems(state) }.flatten()
+    }
+
+    fun markItemAs(id: Long, state: State) {
+        spellbookDbService.markItemAsState(id, state)
     }
 
 }
